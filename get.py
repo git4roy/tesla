@@ -1,6 +1,6 @@
 #! /usr/bin/python3.5
 import time
-import teslajson
+import api as teslajson
 import plot
 
 SAMPLE_TIME_IN_MIN=60*2
@@ -15,8 +15,6 @@ with open("../login.info","r") as fd:
     email=fd.readline().rstrip()
     pwd=fd.readline().rstrip()
 
-print (email,pwd)
-exit()
 try:
     c = teslajson.Connection(email, pwd)
     v = c.vehicles[0]

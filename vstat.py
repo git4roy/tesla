@@ -1,6 +1,6 @@
 #!/usr/bin/python3.5
 import time
-import teslajson
+import api as teslajson
 
 SAMPLE_TIME_IN_MIN=60*2
 def go_sleep(sec):

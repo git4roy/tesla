@@ -1,5 +1,5 @@
 import time
-import teslajson
+import api as teslajson
 import plot
 
 SAMPLE_TIME_IN_MIN=60*2
