@@ -31,6 +31,7 @@ if 1:
                 climate_state = v.data_request('climate_state')
                 vehicle_state = v.data_request('vehicle_state')
                 odo = vehicle_state['odometer']
+                ts = charge_state['timestamp']
                 bat_rng = charge_state['battery_range']
                 bat_lvl = charge_state['battery_level']
                 tmp_in =  climate_state['inside_temp']
@@ -41,10 +42,16 @@ if 1:
                     tmp_in = tmp_in_2
                 
                 tmp_out = climate_state['outside_temp']
-                with open("data.csv","a") as fd: 
+
+                with open("data.csv", "a") as fd: 
                     fd.write("{},{},{},{},{},{}\n".format(
                         time.time(), odo, bat_rng, bat_lvl, tmp_in, tmp_out))
-                print (time.time(), odo, bat_rng, bat_lvl, tmp_in, tmp_out)
+
+                with open("data2.csv", "a") as fd:
+                    fd.write("{},{},{},{},{},{}\n".format(
+                        ts, odo, bat_rng, bat_lvl, tmp_in, tmp_out))
+
+                print (ts, odo, bat_rng, bat_lvl, tmp_in, tmp_out)
                 break
             except:
                 print ("Error requestin data...retry={}".format(retry))

@@ -1,6 +1,6 @@
 #!/usr/bin/python3.5
 import time
-import api as teslajson
+import api
 
 SAMPLE_TIME_IN_MIN=60*2
 def go_sleep(sec):
@@ -14,7 +14,7 @@ with open("../login.info","r") as fd:
     pwd=fd.readline().rstrip()
 
 try:
-    c = teslajson.Connection(email, pwd)
+    c = api.Connection(email, pwd)
     v = c.vehicles[0]
 except:
     print ("Error connection...")

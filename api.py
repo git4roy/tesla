@@ -5,6 +5,9 @@ import json
 import datetime
 import calendar
 
+TESLA_CLIENT_ID = "e4a9949fcfa04068f59abb5a658f2bac0a3428e4652315490b659d5ab3f35a9e"
+TESLA_CLIENT_SECRET = "c75f14bbadc8bee3a7594412c31416f8300256d7668ea7e6e7f06727bfb9d220"
+
 class Connection(object):
         """Connection to Tesla Motors API"""
         def __init__(self,
@@ -15,8 +18,8 @@ class Connection(object):
                 if 1:
                         self.oauth = {
                                 "grant_type" : "password",
-                                "client_id" : "e4a9949fcfa04068f59abb5a658f2bac0a3428e4652315490b659d5ab3f35a9e",
-                                "client_secret" : "c75f14bbadc8bee3a7594412c31416f8300256d7668ea7e6e7f06727bfb9d220",
+                                "client_id" : TESLA_CLIENT_ID,
+                                "client_secret" : TESLA_CLIENT_SECRET,
                                 "email" : email,
                                 "password" : password }
                         self.expiration = 0 # force refresh
