@@ -1,23 +1,11 @@
 #!/usr/bin/python3.5
-import time
 import api
+import json
 
-SAMPLE_TIME_IN_MIN=60*2
-def go_sleep(sec):
-    for d in range(sec):
-        with open('/tmp/mon','w') as fd:
-            fd.write("{}/{}".format(d,sec))
-        time.sleep(1)
+with open('../access_token','r') as fd:
+    access_token=fd.readline()
 
-with open("../login.info","r") as fd:
-    email=fd.readline().rstrip()
-    pwd=fd.readline().rstrip()
+c = api.Connection(access_token)
+v = c.vehicles[0]
 
-try:
-    c = api.Connection(email, pwd)
-    v = c.vehicles[0]
-except:
-    print ("Error connection...")
-    exit()
-for kk,vv in v.items():
-    print ("{}:----{}".format(kk,vv))
+print(v)
