@@ -1,6 +1,4 @@
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen, build_opener
-from urllib.request import ProxyHandler, HTTPBasicAuthHandler, HTTPHandler
+import requests
 import json
 
 TESLA_CLIENT_ID = "e4a9949fcfa04068f59abb5a658f2bac0a3428e4652315490b659d5ab3f35a9e"
@@ -22,18 +20,16 @@ class Connection(object):
                 return self.get("vehicles")
 
         def __open(self, url, data=None):
-                req = Request(url, headers=self.head)
-                 
-                try:
-                    req.data = urlencode(data).encode('utf-8') # Python 3
-                except:
-                    pass
-
-                opener = build_opener()
-                resp = opener.open(req)
-                charset = resp.info().get('charset', 'utf-8')
-
-                return json.loads(resp.read().decode(charset))
+                req = requests.get(url, headers=self.head)
+                if req.status_code == 200:
+                    response = req.json()
+                elif req.status_code == 401:
+                    response = 'Incorrect username or password'
+                elif req.status_code == 404:
+                    response = 'API server has changed, contact the developer of this script'
+                elif req.status_code == 500:
+                    response = 'An internal server error occurred. Either Tesla API is down or the API has changed!'
+                return response
 
 class Vehicle(dict):
         def __init__(self, data, connection):
