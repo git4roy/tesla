@@ -43,7 +43,7 @@ def save_hist(filename, dict_list, field):
     ax.set_ylabel('HOURS')
     ax2.set_ylabel('DISTRIBUTION (%)')
     ax2.grid(True)
-    ax.set_title('Total Time={:.1f} days, Updated Time={}'.format(sum(hrs)/24,datetime))
+    ax.set_title('Total Time={:.1f} days ({:.1f} hours), Updated Time={}'.format(sum(hrs)/24,sum(hrs),datetime))
 
     fig.savefig('/var/www/html/{}_hist'.format(filename))
 
